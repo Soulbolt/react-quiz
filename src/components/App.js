@@ -36,14 +36,14 @@ function reducer(state, action) {
             : state.points,
       };
     case "nextQuestion":
-      return { ...state, index: state.index + 1 };
+      return { ...state, index: state.index + 1, answer: null };
     default:
       throw new Error("Action unknown");
   }
 }
 
 export default function App() {
-  const [{ questions, status, index, answer }, dispatch] = useReducer(
+  const [{ questions, status, index, answer, points }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -72,7 +72,12 @@ export default function App() {
               dispatch={dispatch}
               answer={answer}
             />
-            <NextButton dispatch={dispatch} answer={answer} />
+            <NextButton
+              dispatch={dispatch}
+              answer={answer}
+              numOfQuestions={numOfQuestions}
+              index={index}
+            />
           </>
         )}
       </Main>
